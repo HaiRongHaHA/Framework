@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 
+    1、对数据进行拦截 对象 数组（依赖收集）
+    2、template模板 => ast语法树 => render函数 => 虚拟dom
+    3、new Vue时会产生一个watcher（渲染watcher） vm._update(vm._render()) 创建真实节点
+ -->
+<div id="app" a='1' b style="color: red;font-size:16px;">
+    <ul style="background-color: #ff0;">
+        <li>姓名：{{name}}   哈哈<a href="">链接</a></li>
+        <li>年龄：{{obj.age}}</li>
+    </ul>
+</div>
+<body>
+    <script src="/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            data(){
+                return {
+                    name:'hairong',
+                    obj:{
+                        age:22,
+                        io:{name:'ios啊'}
+                    },
+                    abc:[1,4],
+                    arr:[{a:1}] // vue数组中对象如果变化也需要视图更新
+                }
+            }
+            //, template:'#xxx',
+            // render(){
+
+            // }
+        })
+        setTimeout(() => {
+            vm.name = '665'
+            vm.name = '海容得呀'
+            vm.name = '哦破皮iii'
+            vm.obj.age = 188
+            vm.abc = 222
+            vm.$nextTick(()=>{
+                console.log('更新',vm.$el.innerHTML);
+            })
+            // vm._update(vm._render())    // 强制更新方法
+        }, 500);
+        // vm.arr.push({b:2})
+        // console.log(vm);
+    </script>
+</body>
+</html>

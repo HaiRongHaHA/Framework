@@ -1,0 +1,58 @@
+.navbar {
+  display: flex;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 21, 41, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
+  .size-icon {
+    font-size: 18px;
+  }
+
+  .avatar-container {
+    margin-right: 30px;
+
+    .avatar-wrapper {
+      margin-top: 5px;
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+
+      .el-icon-caret-bottom {
+        font-size: 12px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .right-menu {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 15px;
+
+    .setting {
+      font-size: 26px;
+    }
+
+    &-item {
+      padding: 0 8px;
+      font-size: 18px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
+
+      &.hover-effect {
+        cursor: pointer;
+        transition: background 0.3s;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.025);
+        }
+      }
+    }
+  }
+}

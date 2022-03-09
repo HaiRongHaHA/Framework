@@ -1,0 +1,27 @@
+{
+    "extends": [
+        "stylelint-config-standard",
+        "stylelint-config-recess-order"
+    ],
+    "plugins": [
+        "stylelint-selector-bem-pattern"
+    ],
+    "rules": {
+        "plugin/selector-bem-pattern": {
+            "preset": "bem",
+            "componentName": "[a-z]+",
+            "componentSelectors": {
+                "initial": "^\\.{componentName}(?:__[-a-z]+)?(?:--[a-z]+)?$",
+                "combined": "^\\.{componentName}(?:__[-a-z]+)(?:--[a-z]+)?$"
+            },
+            "utilitySelectors": "^\\.u-[a-z]+(?:__[-a-z0-9]+)?(?:--[a-z]+)?$",
+            "ignoreSelectors": [
+                "^\\.el-",
+                "/deep/",
+                ">>>",
+                "^\\.icon-"
+            ],
+            "ignoreCustomProperties": []
+        }
+    }
+}

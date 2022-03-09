@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 
+    1、对数据进行拦截 对象 数组（依赖收集）
+    2、template模板 => ast语法树 => render函数 => 虚拟dom
+    3、new Vue时会产生一个watcher（渲染watcher） vm._update(vm._render()) 创建真实节点
+ -->
+<div id="app">
+    {{abc}}
+    {{arr}}
+    {{arr2}}
+</div>
+<body>
+    <script src="/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            data(){
+                return {
+                    arr:[1,2,3],
+                    arr2:[[1,2,3]],
+                    abc:{namea:'3434'} //JSON.stringify会对数组取值
+                }
+            }
+        })
+        setTimeout(() => {
+            // vm.arr.push(77)
+            // vm.abc.op = 'sss'
+            vm.arr2[0].push(65)
+        }, 500);
+    </script>
+</body>
+</html>

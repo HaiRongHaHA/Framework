@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 
+    1、对数据进行拦截 对象 数组（依赖收集）
+    2、template模板 => ast语法树 => render函数 => 虚拟dom
+    3、new Vue时会产生一个watcher（渲染watcher） vm._update(vm._render()) 创建真实节点
+ -->
+<div id="app">
+    <my-button></my-button>
+    <my-button></my-button>
+    <my-button></my-button>
+</div>
+<body>
+    <script src="/dist/vue.js"></script>
+    <script>
+        /*
+            Vue.component => Vue.extend =>返回通过对象创建的一个类，
+            通过这个类去创建一个组件去使用
+        */ 
+        Vue.component('my-button',{
+            template:'<button>外部按钮</button>'
+        });
+
+        /*
+            component查找规则
+            先查找自己身上是否存在，没有通过链查找父亲的__proto__
+        */ 
+
+        const vm = new Vue({
+            el:'#app',
+            components:{
+                'my-button':{
+                    template:'<button>内部按钮</button>'
+                }
+            }
+        })
+        
+        /*
+            1. Vue.component => Vue.extend方法 => 生成子类的构造函数
+            2. 如果是组件添加了 init hook()  componentOptions => Ctor
+            3. 创建真实节点时 会调用init钩子  new Ctor().$mount() 内部会
+            在给组件添加一个watcher，会将渲染的节点放在当前实例上，并且返回
+            （vue是组件级更新）
+        */
+    
+    </script>
+</body>
+</html>

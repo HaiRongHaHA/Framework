@@ -1,0 +1,23 @@
+.hamburger-container {
+  float: left;
+  height: 100%;
+  line-height: 46px;
+  cursor: pointer;
+  transition: background 0.3s;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.025);
+  }
+}
+
+.hamburger {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.hamburger.is-active {
+  transform: rotate(180deg);
+}

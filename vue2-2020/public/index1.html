@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 
+    渲染流程
+    语法树：元编程，改变js原有的语法的，针对html语法解析定义的数据结构
+    虚拟dom：针对于对象，把dom结构进行抽离转化的，可以随意定义数据结构
+    
+    模板编译原理 AST语法树（树的遍历） 先标识出html=>js语法
+
+    1、需要将模板变成一个render方法（写成render才能处理指令等复杂语法，不能直接字符串替换(vue早期实现)）
+    2、需要去当前实例上取值 with
+    3、虚拟dom=>对象，描述虚拟dom（diff算法）
+    4、生成一个真实的dom结构扔到也页面中
+ -->
+    <!-- <li v-for="i in 6">{{name}}</li> -->
+
+<div id="app" a='1' b style="color: red;font-size:16px;">
+    <ul style="background-color: #ff0;">
+        <li>{{name}} 姓名 {{obj.age}} 哈哈<a href="">链接</a></li>
+        <li>{{arr}}</li>
+    </ul>
+</div>
+<body>
+    <script src="/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            data(){
+                return {
+                    name:'hairong',
+                    obj:{
+                        age:22,
+                        io:{name:'ios啊'}
+                    },
+                    abc:[1,4],
+                    arr:[{a:1}] // vue数组中对象如果变化也需要视图更新
+                }
+            }
+            //, template:'#xxx',
+            // render(){
+
+            // }
+        })
+        vm.arr.push({b:2})
+        // console.log(vm);
+    </script>
+</body>
+</html>
