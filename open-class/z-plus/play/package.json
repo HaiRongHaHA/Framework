@@ -1,0 +1,7 @@
+{
+  "name": "@z-plus/play",
+  "private":true,
+  "scripts": {
+    "dev": "vite"
+  }
+}
