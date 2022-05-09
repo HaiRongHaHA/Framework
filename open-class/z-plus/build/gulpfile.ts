@@ -1,7 +1,6 @@
 import { series, parallel } from 'gulp'
+import { run,withTaskName } from './utils'
 
 export default series(
- async () => {
-   console.log('打包');
- }
+  withTaskName('clean', () => run('rm -rf ./dist'))
 )

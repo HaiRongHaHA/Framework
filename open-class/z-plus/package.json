@@ -2,6 +2,8 @@
   "private": true,
   "scripts": {
     "dev": "pnpm -C play dev",
+    "clean": "pnpm run clean:dist && pnpm run -r --parallel clean",
+    "clean:dist": "rimraf dist",
     "build": "gulp -f build/gulpfile.ts"
   },
   "keywords": [],
@@ -9,6 +11,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/gulp": "^4.0.9",
+    "chalk": "^5.0.1",
+    "consola": "^2.15.3",
     "gulp": "^4.0.2",
     "sass": "^1.51.0",
     "sucrase": "^3.21.0",

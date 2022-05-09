@@ -8,6 +8,8 @@ importers:
       '@z-plus/components': workspace:^1.0.0
       '@z-plus/theme-chalk': workspace:^1.0.0
       '@z-plus/utils': workspace:^1.0.0
+      chalk: ^5.0.1
+      consola: ^2.15.3
       gulp: ^4.0.2
       sass: ^1.51.0
       sucrase: ^3.21.0
@@ -19,6 +21,8 @@ importers:
       '@z-plus/utils': link:packages/utils
     devDependencies:
       '@types/gulp': 4.0.9
+      chalk: 5.0.1
+      consola: 2.15.3
       gulp: 4.0.2
       sass: 1.51.0
       sucrase: 3.21.0
@@ -483,6 +487,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /chalk/5.0.1:
+    resolution: {integrity: sha512-Fo07WOYGqMfCWHOzSXOt2CxDbC6skS/jO9ynEcmpANMoPrD+W1r1K6Vx7iNm+AQmETU1Xr2t+n8nzkV9t6xh3w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: true
+
   /chokidar/2.1.8:
     resolution: {integrity: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==}
     deprecated: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies
@@ -607,6 +616,10 @@ packages:
       inherits: 2.0.4
       readable-stream: 2.3.7
       typedarray: 0.0.6
+    dev: true
+
+  /consola/2.15.3:
+    resolution: {integrity: sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==}
     dev: true
 
   /convert-source-map/1.8.0:

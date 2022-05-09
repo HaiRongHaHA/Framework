@@ -68,7 +68,9 @@ gulp 控制打包流程的，还可以将css/js/html等代码进行转义输出
 
 gulp打包分串行和并行
 
-gulp执行命令，默认找default 可以指定允许方法
+gulp 执行命令，默认找default 可以指定允许方法
+
+# gulp
 
 // 串行  series
 
