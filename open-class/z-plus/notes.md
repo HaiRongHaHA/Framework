@@ -10,6 +10,10 @@ pnpm init
 
 pnpm install -w // 安装全局包
 
+pnpm run --filter ./packages --parallel build
+
+pnpm run -C packages/theme-chalk build
+
 ```
 
 # 全局安装包，开发时各包可以互相引用
@@ -63,6 +67,8 @@ webpack 适合写业务项目用
 rollup 把多个小模块打包成一个大模块，整合所有的包，适合类库打包用
 
 sucrase // 支持gulp做ts解析，不然会报错需要自己用babel
+比如你可能会想以 TS 的方式编写 gulpfile.ts、但 gulp-cli 本身只支持 gulpfile.js，那就可以用它引入一个前置模块、把 ts 编译成 js 再执行。
+再比如你可能会想使用 ES Module 作为模块化方案，但 Node.js 本身只支持 CommonJS，那么就可以用它来先做个转换。
 
 gulp 控制打包流程的，还可以将css/js/html等代码进行转义输出
 
@@ -70,8 +76,13 @@ gulp打包分串行和并行
 
 gulp 执行命令，默认找default 可以指定允许方法
 
+import { spawn } from 'child_process'
+
+node子进程
+
 # gulp
 
 // 串行  series
 
 // 并行 parallel
+

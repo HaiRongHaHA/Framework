@@ -1,13 +1,33 @@
-import { spawn } from 'child_process'
-import { projRoot } from './paths'
-export const run = async (command: string) => {
-    return new Promise((resolve) => {
-        const [cmd, ...args] = command.split(' ');
-        const app = spawn(cmd, args, {
-            cwd: projRoot,
-            stdio: 'inherit',
-            shell: true
-        });
-        app.on('close', resolve)
+import { spawn } from "child_process"
+import chalk from "chalk"
+import consola from "consola"
+import { projRoot } from "./paths"
+
+export const run = async (command: string, cwd: string = projRoot) => {
+  return new Promise<void>((resolve, reject) => {
+
+    const [cmd, ...args] = command.split(" ")
+
+    consola.info(`run: ${chalk.green(`${cmd} ${args.join(" ")}`)}`)
+
+    const app = spawn(cmd, args, {
+      cwd,
+      stdio: "inherit",
+      shell: true, // 兼容win系统差异
     })
+
+    const onProcessExit = () => app.kill("SIGHUP")
+
+    app.on("close", (code) => {
+      process.removeListener("exit", onProcessExit)
+
+      if (code === 0) resolve()
+      else
+        reject(
+          new Error(`Command failed. \n Command: ${command} \n Code: ${code}`)
+        )
+    })
+
+    process.on("exit", onProcessExit)
+  })
 }

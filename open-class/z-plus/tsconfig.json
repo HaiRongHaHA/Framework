@@ -23,7 +23,9 @@
   },
   "exclude": [ // 排除掉哪些类库
     "node_modules",
-    "**/__tests__",
-    "dist/**"
+    "**/dist",
+    "**/__tests__/**/*",
+    "**/test/**",
+    "**/tests/**"
   ]
 }
