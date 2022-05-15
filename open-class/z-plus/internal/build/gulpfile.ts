@@ -33,6 +33,7 @@ export default series(
   parallel(
     runTask("buildModules"),
     runTask("buildFullBundle"),
+    runTask('generateTypesDefinitions'),
     series(
       withTaskName("buildThemeChalk", () =>
         run("pnpm run -C packages/theme-chalk build")
