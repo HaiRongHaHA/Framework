@@ -1,12 +1,14 @@
 {
   "name": "@z-plus/components",
   "version": "1.0.0",
-  "description": "",
+  "description": "all components are settled here",
   "main": "index.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "module": "index.ts",
+  "unpkg": "index.js",
+  "jsdelivr": "index.js",
+  "peerDependencies": { 
+    "vue": "^3.2.33"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "types": "index.d.ts",
+  "sideEffects": false
 }

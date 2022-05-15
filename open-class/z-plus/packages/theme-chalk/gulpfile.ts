@@ -1,28 +1,30 @@
 import path from "path"
 import chalk from "chalk"
 import { dest, parallel, series, src } from "gulp"
-import gulpSass from "gulp-sass"
+import gulpSass from "gulp-sass" // 处理sass
 import dartSass from "sass"
-import autoprefixer from "gulp-autoprefixer"
-import cleanCSS from "gulp-clean-css"
-import rename from "gulp-rename"
+import autoprefixer from "gulp-autoprefixer" // 添加前缀
+import cleanCSS from "gulp-clean-css" // 压缩css
+import rename from "gulp-rename" // 重命名
 import consola from "consola"
-import { epOutput } from "./../../build/utils"
+import { epOutput } from "@z-plus/build-utils"
 
 const distFolder = path.resolve(__dirname, "dist")
 const distBundle = path.resolve(epOutput, "theme-chalk")
 
 /**
- * compile theme-chalk scss & minify
- * not use sass.sync().on('error', sass.logError) to throw exception
- * @returns
+ * 编译scss文件并压缩
  */
 function buildThemeChalk() {
   const sass = gulpSass(dartSass)
   const noElPrefixFile = /(index|base|display)/
   return src(path.resolve(__dirname, "src/*.scss"))
     .pipe(sass.sync())
-    .pipe(autoprefixer({ cascade: false }))
+    .pipe(
+      autoprefixer({
+        cascade: false, //是否美化属性值
+      })
+    )
     .pipe(
       cleanCSS({}, (details) => {
         consola.success(
@@ -33,12 +35,15 @@ function buildThemeChalk() {
       })
     )
     .pipe(
+      // 重命名css文件名，都加上el-前缀，
+      // 排除 index.scss[全部样式] base.scss[基础样式] display.scss[媒体查询]
       rename((path) => {
         if (!noElPrefixFile.test(path.basename)) {
-          path.basename = `el-${path.basename}`
+          path.basename = `z-${path.basename}`
         }
       })
     )
+    // 输出dist目录到当前包
     .pipe(dest(distFolder))
 }
 
@@ -64,14 +69,14 @@ function buildDarkCssVars() {
 }
 
 /**
- * copy from packages/theme-chalk/dist to dist/element-plus/theme-chalk
+ * 从当前包目录将dist目录拷贝到 根dist/z-plus/下
  */
 export function copyThemeChalkBundle() {
   return src(`${distFolder}/**`).pipe(dest(distBundle))
 }
 
 /**
- * copy source file to packages
+ * 拷贝源码到项目根dist目录
  */
 
 export function copyThemeChalkSource() {

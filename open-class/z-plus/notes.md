@@ -9,10 +9,23 @@ pnpm-workspace.yaml配置文件
 pnpm init
 
 pnpm install -w // 安装全局包
+-w --workspace-root
 
 pnpm run --filter ./packages --parallel build
+-F --filter
+-r 所有子目录同时运行更新
+--parallel 在所有匹配的包中立即运行给定的脚本
 
 pnpm run -C packages/theme-chalk build
+
+-C <path>, --dir <path>
+
+将 <path> 设置为 pnpm 的运行目录，而不是当前目录。
+
+pnpm:devPreinstall
+仅在本地执行 pnpm install 时运行。
+
+pnpm run start {name}
 
 ```
 
@@ -22,6 +35,8 @@ pnpm run -C packages/theme-chalk build
 
 ```
 pnpm install @z-plus/components @z-plus/theme-chalk @z-plus/utils -ws
+
+pnpm install @z-plus/build-utils --wd
 ```
 
 ```
@@ -81,8 +96,95 @@ import { spawn } from 'child_process'
 node子进程
 
 # gulp
+公有任务：导出的任务方法
 
-// 串行  series
+私有任务：未被导出的，用series/parallel包裹执行的方法
 
-// 并行 parallel
+gulp 默认执行default任务（gulpfile.ts中默认到处的就是default任务）
 
+gulp --tasks  // 查看gulp公有/私有任务
+
+--require
+
+-f
+
+- 串行  series
+- 并行 parallel
+- src() 读文件生成node流，src() 也可以放在管道（pipeline）的中间，以根据给定的 glob 向流（stream）中添加文件。新加入的文件只对后续的转换可用。如果 glob 匹配的文件与之前的有重复，仍然会再次添加文件。
+- pipe() 连接装换流/可写流 pipeline管道 ，大多数情况下，利用 .pipe() 方法将插件放置在 src() 和 dest() 之间，并转换流中的文件。
+- dest() 接收输出目录，产生一个node流，通常作为终止流
+
+# npm包
+## unbuild
+统一的javascript构建系统，支持typescript并生成commonjs和module格式+类型声明。
+
+Stub dist一旦使用jiti，您就可以尝试链接您的项目，而无需在开发过程中进行监视和重建。
+
+Create src/index.ts and build.config.ts:
+
+配置选项
+https://github.com/unjs/unbuild/blob/HEAD/src/types.ts
+
+## components-helper
+VSCode + Volar 通过 ts 类型文件实现相关提示
+VSCode + Vetur 通过 tags.json 和 attributes.json 实现相关提示
+WebStorm 通过 web-types.json 实现相关提示
+基于文档提供vue组件库的代码提示文件。
+
+https://zhuanlan.zhihu.com/p/431382898
+
+https://github.com/tolking/components-helper
+
+## fast-glob
+## 读取目标文件夹下的所有文件的状态stats，返回一个由文件的状态stats组成的数组
+
+## esbuild
+esbuild是最近比较火的编译工具，在有些领域已经开始替代webpack或babel，它的构建速度是 webpack 的几十倍。
+
+https://juejin.cn/post/6918927987056312327
+
+https://segmentfault.com/a/1190000040203331?utm_source=tag-newest
+
+# package.json
+
+peerDependencies
+
+unpkg
+
+jsdelivr
+
+sideEffects
+
+https://www.jqhtml.com/34046.html
+
+# rollup
+
+## 插件
+- name 插件名
+- resolveId ??
+
+# 按需导入
+不再用babel，使用unplugin-vue-components 和 unplugin-auto-import这两款插件做按需导入
+
+https://github.com/antfu/unplugin-vue-components#installation
+
+https://github.com/antfu/unplugin-auto-import#install
+
+```
+// vite.config.ts
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+export default {
+  plugins: [
+    // ...
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
+}
+```

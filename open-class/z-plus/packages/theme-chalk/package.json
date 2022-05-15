@@ -2,13 +2,15 @@
   "name": "@z-plus/theme-chalk",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.css",
+  "unpkg": "index.css",
+  "jsdelivr": "index.css",
+  "style": "index.css",
   "scripts": {
+    "clean": "rimraf dist",
     "build": "gulp"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/gulp-autoprefixer": "^0.0.33",
     "@types/gulp-clean-css": "^4.3.0",

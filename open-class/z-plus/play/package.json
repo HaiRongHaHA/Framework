@@ -1,7 +1,11 @@
 {
   "name": "@z-plus/play",
-  "private":true,
+  "private": true,
   "scripts": {
     "dev": "vite"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "2.3.1",
+    "vite": "^2.9.9"
   }
 }
